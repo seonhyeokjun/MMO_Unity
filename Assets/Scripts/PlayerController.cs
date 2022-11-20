@@ -15,6 +15,24 @@ struct MyVector
     public float y;
     public float z;
     
+    //               +
+    //       +       +
+    // +-------------+
+    public float manitude
+    {
+        get
+        {
+            return Mathf.Sqrt(x * x + y * y + z * z);
+        }
+    }
+    public MyVector normalized
+    {
+        get
+        {
+            return new MyVector(x / manitude, y / manitude, z / manitude);
+        }
+    }
+    
     public MyVector(float x, float y, float z)
     {
         this.x = x;
@@ -31,6 +49,11 @@ struct MyVector
     {
         return new MyVector(a.x - b.x, a.y - b.y, a.z - b.z);
     }
+
+    public static MyVector operator *(MyVector a, float d)
+    {
+        return new MyVector(a.x * d, a.y * d, a.z * d);
+    }
 }
 
 public class PlayerController : MonoBehaviour
@@ -46,12 +69,16 @@ public class PlayerController : MonoBehaviour
         MyVector to = new MyVector(10.0f, 0.0f, 0.0f);
         MyVector from = new MyVector(5.0f, 0.0f, 0.0f);
         MyVector dir = to - from; // (5.0f, 0.0f, 0.0f)
-        
+
+        dir = dir.normalized; // (1.0f, 0.0f, 0.0f)
+
+        MyVector newPos = from + dir * _speed;
+
         // 방향 벡터
         // 1. 거리 (크기)
         // 2. 실제 방향
-        
-        
+
+
     }
 
     // GameObject (Player)
@@ -64,8 +91,7 @@ public class PlayerController : MonoBehaviour
         
         // World -> Local
         // InverseTransformDirection
-        transform.position += new Vector3(0.0f, 1.0f, 0.0f);
-        
+
         if (Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.forward * (Time.deltaTime * _speed));
