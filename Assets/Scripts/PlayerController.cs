@@ -7,6 +7,24 @@ using UnityEngine.UIElements;
 using UnityEngine.Windows;
 using Input = UnityEngine.Input;
 
+class Tank
+{
+    // 온갖 정보
+    public float speed = 15.0f;
+    Player Player; // 포함 관계 Nested(중첩된) Prefab(Pre-Fabrication)
+}
+
+class FastTank : Tank
+{
+    
+}
+
+class Player
+{
+    
+}
+
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
@@ -16,6 +34,14 @@ public class PlayerController : MonoBehaviour
     {
         Managers.Input.KeyAction -= Onkeyboard;
         Managers.Input.KeyAction += Onkeyboard;
+
+        Tank tank1 = new Tank(); // Instance를 만든다.
+        tank1.speed = 11.0f;
+        Tank tank2 = new Tank(); // Instance를 만든다.
+        tank2.speed = 21.0f;
+        Tank tank3 = new Tank(); // Instance를 만든다.
+        Tank tank4 = new Tank(); // Instance를 만든다.
+        Tank tank5 = new Tank(); // Instance를 만든다.
     }
 
     private float _yAngle = 0.0f;
