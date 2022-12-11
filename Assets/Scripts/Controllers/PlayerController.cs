@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
         Managers.Input.MouseAction += OnMouseClicked;
     }
 
+    float wait_run_ratio = 0;
     void Update()
     {
         if (_moveToDest)
@@ -42,13 +43,17 @@ public class PlayerController : MonoBehaviour
 
         if (_moveToDest)
         {
+            wait_run_ratio = Mathf.Lerp(wait_run_ratio, 1, 10.0f * Time.deltaTime);
             Animator anim = GetComponent<Animator>();
-            anim.Play("RUN");
+            anim.SetFloat("wait_run_ratio", wait_run_ratio);
+            anim.Play("WAIT_RUN");
         }
         else
         {
+            wait_run_ratio = Mathf.Lerp(wait_run_ratio, 0, 10.0f * Time.deltaTime);
             Animator anim = GetComponent<Animator>();
-            anim.Play("WAIT");
+            anim.SetFloat("wait_run_ratio", wait_run_ratio);
+            anim.Play("WAIT_RUN");
         }
         
     }
