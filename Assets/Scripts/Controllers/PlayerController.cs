@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         // 현재 게임 상태에 대한 정보를 넘겨준다
         anim.SetFloat("speed", _speed);
     }
-    
+
     private void UpdateIdle()
     {
         // 애니메이션
