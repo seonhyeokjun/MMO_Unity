@@ -33,6 +33,13 @@ public class UI_Button : UI_Popup
     
     void Start()
     {
+        Init();
+    }
+
+    public override void Init()
+    {
+        base.Init();
+        
         Bind<Button>(typeof(Buttons));
         Bind<Text>(typeof(Texts));
         Bind<GameObject>(typeof(GameObjects));
